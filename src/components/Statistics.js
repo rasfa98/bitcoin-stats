@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import classnames from 'classnames';
 
 import StatisticCard from './StatisticCard';
 
@@ -7,7 +8,6 @@ class Statistics extends Component {
   state = {
     symbol: null,
     price: null,
-    total_volume_24_hours: null,
     last_market: null,
     change_24_hours: null,
     change_day: null,
@@ -23,7 +23,6 @@ class Statistics extends Component {
     const {
       FROMSYMBOL,
       PRICE,
-      TOTALVOLUME24HTO,
       LASTMARKET,
       CHANGEPCT24HOUR,
       CHANGEPCTDAY,
@@ -33,7 +32,6 @@ class Statistics extends Component {
     this.setState({
       symbol: FROMSYMBOL,
       price: PRICE,
-      total_volume_24_hours: TOTALVOLUME24HTO,
       last_market: LASTMARKET,
       change_24_hours: CHANGEPCT24HOUR,
       change_day: CHANGEPCTDAY,
@@ -45,31 +43,36 @@ class Statistics extends Component {
     return (
       <div>
         <h1>Statistics</h1>
-        <StatisticCard name="Price" icon="" value={this.state.price} />
         <StatisticCard
-          name="Total volume 24 hours"
-          icon=""
-          value={this.state.total_volume_24_hours}
+          name="Price"
+          icon="fas fa-euro-sign"
+          value={this.state.price}
+        />
+        <StatisticCard
+          name="Market cap"
+          icon="fas fa-chart-pie"
+          value={this.state.market_cap}
         />
         <StatisticCard
           name="Last market"
-          icon=""
+          icon="fas fa-shopping-cart"
           value={this.state.last_market}
         />
         <StatisticCard
           name="Change 24 hours"
-          icon=""
+          icon={classnames('fas', {
+            'fa-caret-down': this.state.change_24_hours < 0,
+            'fa-caret-up': this.state.change_24_hours > 0
+          })}
           value={this.state.change_24_hours}
         />
         <StatisticCard
           name="Change day"
-          icon=""
+          icon={classnames('fas', {
+            'fa-caret-down': this.state.change_day < 0,
+            'fa-caret-up': this.state.change_day > 0
+          })}
           value={this.state.change_day}
-        />
-        <StatisticCard
-          name="Market cap"
-          icon=""
-          value={this.state.market_cap}
         />
       </div>
     );

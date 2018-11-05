@@ -4,7 +4,9 @@ function StatisticCard(props) {
   return (
     <div>
       <h1>{props.name}</h1>
-      <h2>{props.icon}</h2>
+      <h2>
+        <i className={props.icon} />
+      </h2>
       <p>{props.value}</p>
     </div>
   );
