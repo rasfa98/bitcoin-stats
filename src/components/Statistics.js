@@ -23,7 +23,7 @@ class Statistics extends Component {
     const {
       FROMSYMBOL,
       PRICE,
-      TOTALVOLUME24H,
+      TOTALVOLUME24HTO,
       LASTMARKET,
       CHANGEPCT24HOUR,
       CHANGEPCTDAY,
@@ -33,7 +33,7 @@ class Statistics extends Component {
     this.setState({
       symbol: FROMSYMBOL,
       price: PRICE,
-      total_volume_24_hours: TOTALVOLUME24H,
+      total_volume_24_hours: TOTALVOLUME24HTO,
       last_market: LASTMARKET,
       change_24_hours: CHANGEPCT24HOUR,
       change_day: CHANGEPCTDAY,
