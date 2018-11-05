@@ -2,7 +2,7 @@ import React from 'react';
 
 function StatisticCard(props) {
   return (
-    <div>
+    <div className="card">
       <h1>{props.name}</h1>
       <h2>
         <i className={props.icon} />

@@ -1,0 +1,23 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #273e4c;
+  color: whitesmoke;
+}
+
+.card {
+  background-color: #1e323e;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 30% 30%;
+  gap: 10px;
+  justify-content: center;
+}
+
+#title {
+  text-align: center;
+}
