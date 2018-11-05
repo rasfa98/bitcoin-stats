@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import StatisticCard from './StatisticCard';
+
 class Statistics extends Component {
   state = {
     symbol: null,
     price: null,
     total_volume_24_hours: null,
-    high_day: null,
-    low_day: null,
     last_market: null,
     change_24_hours: null,
     change_day: null,
@@ -24,8 +24,6 @@ class Statistics extends Component {
       FROMSYMBOL,
       PRICE,
       TOTALVOLUME24H,
-      HIGHDAY,
-      LOWDAY,
       LASTMARKET,
       CHANGEPCT24HOUR,
       CHANGEPCTDAY,
@@ -36,8 +34,6 @@ class Statistics extends Component {
       symbol: FROMSYMBOL,
       price: PRICE,
       total_volume_24_hours: TOTALVOLUME24H,
-      high_day: HIGHDAY,
-      low_day: LOWDAY,
       last_market: LASTMARKET,
       change_24_hours: CHANGEPCT24HOUR,
       change_day: CHANGEPCTDAY,
@@ -49,6 +45,32 @@ class Statistics extends Component {
     return (
       <div>
         <h1>Statistics</h1>
+        <StatisticCard name="Price" icon="" value={this.state.price} />
+        <StatisticCard
+          name="Total volume 24 hours"
+          icon=""
+          value={this.state.total_volume_24_hours}
+        />
+        <StatisticCard
+          name="Last market"
+          icon=""
+          value={this.state.last_market}
+        />
+        <StatisticCard
+          name="Change 24 hours"
+          icon=""
+          value={this.state.change_24_hours}
+        />
+        <StatisticCard
+          name="Change day"
+          icon=""
+          value={this.state.change_day}
+        />
+        <StatisticCard
+          name="Market cap"
+          icon=""
+          value={this.state.market_cap}
+        />
       </div>
     );
   }
