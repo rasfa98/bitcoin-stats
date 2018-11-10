@@ -4,37 +4,26 @@ import axios from 'axios';
 
 class PriceChart extends Component {
   state = {
-    chartData: null
+    chartData: null,
+    chartOptions: null
   };
 
   async componentDidMount() {
     const URL =
-      'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=EUR&limit=7';
+      'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=EUR&limit=30';
 
     const res = await axios.get(URL);
-    const data = this.mapHistoricalData(res.data.Data);
-    const chartData = this.getChartData(data.max, data.formatedDates);
+    const data = res.data.Data.map(x => x.high);
 
-    this.setState({ chartData: chartData });
+    const chartData = this.getChartData(data);
+    const chartOptions = this.getChartOptions();
+
+    this.setState({ chartData: chartData, chartOptions: chartOptions });
   }
 
-  mapHistoricalData(data) {
-    const max = data.map(x => x.high);
-    const dates = data.map(x => x.time);
-
-    const formatedDates = [];
-
-    dates.forEach(x => {
-      const date = new Date(x * 1000);
-      formatedDates.push(date);
-    });
-
-    return { max: max, formatedDates: formatedDates };
-  }
-
-  getChartData = (data, labels) => {
+  getChartData = data => {
     return {
-      labels: labels,
+      labels: Array(data.length),
       datasets: [
         {
           label: 'Price change',
@@ -44,8 +33,40 @@ class PriceChart extends Component {
     };
   };
 
+  getChartOptions() {
+    return {
+      legend: {
+        display: false
+      },
+      tooltips: {
+        displayColors: false,
+        callbacks: {
+          label: function(tooltipItem, chartData) {
+            return '€ ' + tooltipItem.yLabel;
+          }
+        }
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              callback: function(value, index, values) {
+                return '€ ' + value;
+              }
+            }
+          }
+        ]
+      }
+    };
+  }
+
   render() {
-    return <Line data={this.state.chartData} />;
+    return (
+      <div>
+        <h1>Price change 30 days</h1>
+        <Line data={this.state.chartData} options={this.state.chartOptions} />
+      </div>
+    );
   }
 }
 

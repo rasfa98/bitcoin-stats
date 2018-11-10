@@ -36,7 +36,7 @@ class Statistics extends Component {
   render() {
     return (
       <div>
-        <h1 id="title">Bitcoin</h1>
+        <h1>Bitcoin</h1>
 
         <div className="container">
           <StatisticCard
@@ -51,16 +51,16 @@ class Statistics extends Component {
           />
           <StatisticCard
             name="Last market"
-            icon="fas fa-shopping-cart"
+            icon="fas fa-store-alt"
             value={this.state.last_market}
           />
           <StatisticCard
             name="Change 24 hours"
             icon={classnames('fas', {
-              'fa-caret-down': this.state.change_24_hours < 0,
-              'fa-caret-up': this.state.change_24_hours > 0
+              'fa-arrow-circle-down': this.state.change_24_hours < 0,
+              'fa-arrow-circle-up': this.state.change_24_hours > 0
             })}
-            value={this.state.change_24_hours}
+            value={`% ${this.state.change_24_hours}`}
           />
         </div>
       </div>
